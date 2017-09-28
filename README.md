@@ -1,5 +1,5 @@
 # FluxMap
-This application generates a visualization to examine the outcome of theoretical couples of various incomes filing their taxes jointly or separately. When application is open, mouse cursor may be used to explore fine-grain analysis of specific income pairs.
+This application generates a visualization to examine the outcome for theoretical couples of various incomes filing their taxes jointly or separately. When application is open, mouse cursor may be used to explore fine-grain analysis of specific income pairs.
 
 # Directions:
 1. Download Processing (2.2.1) - https://processing.org/download/
