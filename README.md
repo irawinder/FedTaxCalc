@@ -3,9 +3,9 @@ This application generates a visualization to examine the outcome for theoretica
 
 # Directions:
 1. Download Processing (2.2.1) - https://processing.org/download/
-2. Confirm Lastest Java is Installed https://java.com/en/download/mac_download.jsp
-3. Clone The Repository
-4. Run "FedTaxCalc.pde" using Processing Application
+2. Confirm latest Java is installed https://java.com/en/download/mac_download.jsp
+3. Clone this GitHub repository
+4. Run "FedTaxCalc.pde" using Processing application
 
 # Income up to $200k each
  ![FedTaxCalc](screenshots/200k_Income.png "Income up to $200k each")
