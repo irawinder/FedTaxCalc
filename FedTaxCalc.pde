@@ -51,11 +51,6 @@ void setup() {
      
     } 
   }
-  
-  println( incomeTax(24000, "single") );
-  println( incomeTax(82000, "single") );
-  println( incomeTax(82000, "single")  + incomeTax(24000, "single") );
-  println( incomeTax(24000+82000, "married") );
 }
 
 float CANVAS_X = 800;
@@ -78,17 +73,12 @@ void draw() {
     fill(#00FF00, 255*i/20.0);
     rect(2*i + CANVAS_X - 100, -55, 2, 12);
   }
-//  fill(#000000);
-//  stroke(#333333);
-//  strokeWeight(1);
-//  rect(CANVAS_X - 90, -30, 12, 12);
   noStroke();
   
   textAlign(RIGHT);
   fill(255);
   text("Cheaper to File Taxes Separately", CANVAS_X - 110, -80 + 10);
   text("Cheaper to File Taxes Jointly", CANVAS_X - 110, -55 + 10);
-  //text("No Difference", CANVAS_X - 110, -30 + 10);
   text("$" + int(MAX_DIFF) + "+", CANVAS_X, -80 + 10);
   text("$" + int(MAX_DIFF) + "+", CANVAS_X, -55 + 10);
   
