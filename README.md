@@ -8,8 +8,7 @@ This application generates a visualization to examine the outcome of theoretical
 4. Run "FedTaxCalc.pde" using Processing Application
 
 # Income up to $200k each
- ![FedTaxCalc](FedTaxCalc/screenshots/200k_Income.png "Income up to $200k each")
+ ![FedTaxCalc](screenshots/200k_Income.png "Income up to $200k each")
 
 # Income up to $500k each
- ![FedTaxCalc](FedTaxCalc/screenshots/500k_Income.png "Income up to $500k each")
-
+ ![FedTaxCalc](screenshots/500k_Income.png "Income up to $500k each")
