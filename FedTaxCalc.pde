@@ -161,7 +161,7 @@ void draw() {
           "Tax Filing Separately:" + "\n" + 
           "Tax Filing Jointly:" + "\n" + 
           "Difference [$]:" + "\n" +
-          "Difference [$]:",
+          "Difference [%]:",
           0, CANVAS_Y + 30);
     textAlign(RIGHT);
     text( "\n" + //"(" + mouseU + "," + (NUM_INTERVALS - mouseV - 1) + ")" + "\n" + 
