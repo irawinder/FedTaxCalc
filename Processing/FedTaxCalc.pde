@@ -30,15 +30,17 @@ float[][] marriedBracket = {
 // difference filing jointly vs filing single [n][n][2]
 // [][][0] = federal tax if filing as single
 // [][][1] = federal tax if filing as married
+// [][][2] = total household income
 float[][][] taxSummary;
 
 int NUM_INTERVALS = 200;
-float INTERVAL_RESOLUTION = 1000.0; // USD
+float INTERVAL_RESOLUTION = 2500.0; // USD
+float MAX_DIFF = 0.05;
 
 void setup() {
   size(1100, 1100);
   
-  taxSummary = new float[NUM_INTERVALS][NUM_INTERVALS][2];
+  taxSummary = new float[NUM_INTERVALS][NUM_INTERVALS][3];
   for (int i=0; i<NUM_INTERVALS; i++) {
     for (int j=0; j<NUM_INTERVALS; j++) {
       
@@ -47,14 +49,12 @@ void setup() {
       
       // Calculate Taxes if Filing Jointly (Married)
       taxSummary[i][j][1] = incomeTax( (i+j)*INTERVAL_RESOLUTION, "married");
+      
+      // Calculate Taxes if Filing Jointly (Married)
+      taxSummary[i][j][2] = (i+j)*INTERVAL_RESOLUTION;
      
     } 
   }
-  
-  println( incomeTax(24000, "single") );
-  println( incomeTax(82000, "single") );
-  println( incomeTax(82000, "single")  + incomeTax(24000, "single") );
-  println( incomeTax(24000+82000, "married") );
 }
 
 float CANVAS_X = 800;
@@ -69,16 +69,22 @@ void draw() {
   
   // Legend
   noStroke();
-  fill(#FF0000);
-  rect(CANVAS_X - 12, -80, 12, 12);
-  fill(#00FF00);
-  rect(CANVAS_X - 12, -55, 12, 12);
-  fill(#000000);
-  stroke(#333333);
-  strokeWeight(1);
-  rect(CANVAS_X - 12, -30, 12, 12);
+  for (int i=0; i<20; i++) {
+    fill(#FF0000, 255*i/20.0);
+    rect(3*i + CANVAS_X - 110, -80, 3, 12);
+  }
+  for (int i=0; i<20; i++) {
+    fill(#00FF00, 255*i/20.0);
+    rect(3*i + CANVAS_X - 110, -55, 3, 12);
+  }
   noStroke();
   
+  textAlign(RIGHT);
+  fill(255);
+  text("Cheaper to File Taxes Separately", CANVAS_X - 110, -80 + 10);
+  text("Cheaper to File Taxes Jointly", CANVAS_X - 110, -55 + 10);
+  text(int(1000*MAX_DIFF)/10.0 + "% +", CANVAS_X, -80 + 10);
+  text(int(1000*MAX_DIFF)/10.0 + "% +", CANVAS_X, -55 + 10);
   
   fill(255);
   textAlign(LEFT);
@@ -87,14 +93,12 @@ void draw() {
        "Ira Winder, jiw@mit.edu", 0, -80 + 10);
   
   stroke(255);
+  strokeWeight(1);
   line(0, -24, 30, -24);
   text("Tax Bracket Threshold for Single-filer", 40, -30 + 10);
   noStroke();
   
-  textAlign(RIGHT);
-  text("Cheaper to File Taxes Separately", CANVAS_X - 32, -80 + 10);
-  text("Cheaper to File Taxes Jointly", CANVAS_X - 32, -55 + 10);
-  text("No Difference", CANVAS_X - 32, -30 + 10);
+  
   
   noStroke();
   float diff;
@@ -103,8 +107,8 @@ void draw() {
     for (int j=0; j<NUM_INTERVALS; j++) {
       diff = taxSummary[i][j][0] - taxSummary[i][j][1]; // single - married
       fill(0, 0, 0);
-      if (diff >  +0.5) fill(0, 255, 0, 255*diff/5000);
-      if (diff <  -0.5) fill(255, 0, 0, 255*abs(diff)/5000);
+      if (diff >  +0.5) fill(0, 255, 0, 255*diff/taxSummary[i][j][2]/MAX_DIFF);
+      if (diff <  -0.5) fill(255, 0, 0, 255*abs(diff)/taxSummary[i][j][2]/MAX_DIFF);
       rect((i-1)*CANVAS_X/NUM_INTERVALS, (NUM_INTERVALS-j)*CANVAS_Y/NUM_INTERVALS, CANVAS_X/NUM_INTERVALS, CANVAS_Y/NUM_INTERVALS);
     }
   }
@@ -156,7 +160,8 @@ void draw() {
           "Income B:" + "\n" +
           "Tax Filing Separately:" + "\n" + 
           "Tax Filing Jointly:" + "\n" + 
-          "Difference:",
+          "Difference [$]:" + "\n" +
+          "Difference [%]:",
           0, CANVAS_Y + 30);
     textAlign(RIGHT);
     text( "\n" + //"(" + mouseU + "," + (NUM_INTERVALS - mouseV - 1) + ")" + "\n" + 
@@ -164,7 +169,8 @@ void draw() {
           "$" + int(mouseU*INTERVAL_RESOLUTION) + "\n" +
           "$" + int(taxSummary[mouseU][NUM_INTERVALS - mouseV - 1][0]) + "\n" + 
           "$" + int(taxSummary[mouseU][NUM_INTERVALS - mouseV - 1][1]) + "\n" + 
-          "$" + int(taxSummary[mouseU][NUM_INTERVALS - mouseV - 1][0] - taxSummary[mouseU][NUM_INTERVALS - mouseV - 1][1]),
+          "$" + int(taxSummary[mouseU][NUM_INTERVALS - mouseV - 1][0] - taxSummary[mouseU][NUM_INTERVALS - mouseV - 1][1]) + "\n" + 
+          int(1000*(taxSummary[mouseU][NUM_INTERVALS - mouseV - 1][0] - taxSummary[mouseU][NUM_INTERVALS - mouseV - 1][1])/taxSummary[mouseU][NUM_INTERVALS - mouseV - 1][2])/10.0 + "%",
           200, CANVAS_Y + 30);
         
   }
