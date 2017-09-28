@@ -93,6 +93,7 @@ void draw() {
        "Ira Winder, jiw@mit.edu", 0, -80 + 10);
   
   stroke(255);
+  strokeWeight(1);
   line(0, -24, 30, -24);
   text("Tax Bracket Threshold for Single-filer", 40, -30 + 10);
   noStroke();
