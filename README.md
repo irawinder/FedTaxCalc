@@ -8,11 +8,5 @@ This application generates a visualization to examine the outcome for theoretica
 4. Run "FedTaxCalc.pde" using Processing application
 
 
-# Income up to $200k each
+# Combined Income up to $500k
  ![FedTaxCalc](screenshots/500k_Income_Ratio.png "Income up to $500k each")
- 
-# Income up to $200k each
- ![FedTaxCalc](screenshots/200k_Income.png "Income up to $200k each")
-
-# Income up to $500k each
- ![FedTaxCalc](screenshots/500k_Income.png "Income up to $500k each")
